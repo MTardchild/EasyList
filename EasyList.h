@@ -5,5 +5,12 @@ typedef struct node {
 
 int main();
 void ListPrint (NextPlaceOps*);
-void ListPushEnd (NextPlaceOps*, int);
+
 void ListPushStart (NextPlaceOps **head, int val);
+void ListPushEnd (NextPlaceOps*, int);
+
+void ListPopStart (NextPlaceOps **head);
+void ListPopEnd (NextPlaceOps *head);
+
+void ListPopAtIndex (NextPlaceOps **head, int index);
+void ListPushAtIndex (NextPlaceOps **head, int value, int index);
