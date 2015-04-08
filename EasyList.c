@@ -3,25 +3,25 @@
 #include "EasyList.h"
 
 void ListPrint (NextPlaceOps *head) {
-    NextPlaceOps *current = head;
+    NextPlaceOps *Current = head;
     int i = 0;
 
-    while (current != NULL) {
-        printf("List[%d]: %d \n", i, current->value);
-        current = current->next;
+    while (Current != NULL) {
+        printf("List[%d]: %d \n", i, Current->value);
+        Current = Current->next;
         i++;
     }
 }
 
 void ListPushEnd (NextPlaceOps *head, int value) {
-    NextPlaceOps *current = head;
+    NextPlaceOps *Current = head;
 
-    while (current->next != NULL) {
-        current = current->next;
+    while (Current->next != NULL) {
+        Current = Current->next;
     }
-    current->next = malloc(sizeof(NextPlaceOps));
-    current->next->value = value;
-    current->next->next = NULL;
+    Current->next = malloc(sizeof(NextPlaceOps));
+    Current->next->value = value;
+    Current->next->next = NULL;
 }
 
 void ListPushStart (NextPlaceOps **head, int val) {
@@ -102,46 +102,64 @@ void ListPushAtIndex (NextPlaceOps **head, int value, int index) {
     Current->next = NewItem;
 }
 
-int main () {
-    NextPlaceOps *head = NULL;
-    head = malloc(sizeof(NextPlaceOps));
+void ListPopFirstItemAtValue (NextPlaceOps **headPoint, NextPlaceOps *head, int value) {
+    NextPlaceOps *Current = head;
+    int i = 0;
 
-    if (head == NULL) {
+    while (Current != NULL) {
+        if (Current->value == value) {
+            ListPopAtIndex(headPoint, i);
+            return;
+        }
+        Current = Current->next;
+        i++;
+    }
+}
+
+int main () {
+    NextPlaceOps *Head = NULL;
+    Head = malloc(sizeof(NextPlaceOps));
+
+    if (Head == NULL) {
         return 1;
     }
 
     printf("// Initialized standard list with values 1 and 2 //\n");
-    head->value = 1;
-    head->next = malloc(sizeof(NextPlaceOps));
-    head->next->value = 2;
-    head->next->next = NULL;
+    Head->value = 1;
+    Head->next = malloc(sizeof(NextPlaceOps));
+    Head->next->value = 2;
+    Head->next->next = NULL;
 
     printf("\n // Push at end, value 5// \n");
-    ListPushEnd(head, 5);
-    ListPrint(head);
+    ListPushEnd(Head, 5);
+    ListPrint(Head);
 
-    NextPlaceOps **HeadPointer = &head;
+    NextPlaceOps **HeadPointer = &Head;
     printf("\n// Push to start, value 12 // \n");
 
     ListPushStart(HeadPointer, 12);
-    ListPrint(head);
+    ListPrint(Head);
 
     printf("\n// Pop at Start and End // \n");
     ListPopStart(HeadPointer);
-    ListPopEnd(head);
-    ListPrint(head);
+    ListPopEnd(Head);
+    ListPrint(Head);
 
     printf("\n// Pop at Index 1 // \n");
     ListPopAtIndex(HeadPointer, 1);
-    ListPrint(head);
+    ListPrint(Head);
 
     printf("\n// Push at Index 2 // \n");
     ListPushAtIndex(HeadPointer, 5, 2);
-    ListPrint(head);
+    ListPrint(Head);
 
     printf("\n// Push at Index 1 // \n");
     ListPushAtIndex(HeadPointer, 5, 1);
-    ListPrint(head);
+    ListPrint(Head);
+
+    printf("\n// Pop first item with value 5 // \n");
+    ListPopFirstItemAtValue(HeadPointer, Head, 5);
+    ListPrint(Head);
 
     return 0;
 }
