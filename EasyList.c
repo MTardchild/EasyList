@@ -45,6 +45,7 @@ void ListPopEnd (NextPlaceOps *head) {
     if (head->next == NULL) {
         free(head);
         head = NULL;
+        return;
     }
     NextPlaceOps *Current = head;
     NextPlaceOps *NextItem = head->next;
