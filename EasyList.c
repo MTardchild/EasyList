@@ -124,18 +124,18 @@ int main () {
         return 1;
     }
 
-    printf("// Initialized standard list with values 1 and 2 //\n");
+    printf("// Initialized standard list with values 1 and 2 //");
     Head->value = 1;
     Head->next = malloc(sizeof(NextPlaceOps));
     Head->next->value = 2;
     Head->next->next = NULL;
 
-    printf("\n // Push at end, value 5// \n");
+    printf("\n// Push at end, value 5// \n");
     ListPushEnd(Head, 5);
     ListPrint(Head);
 
     NextPlaceOps **HeadPointer = &Head;
-    printf("\n// Push to start, value 12 // \n");
+    printf("\n// Push at start, value 12 // \n");
 
     ListPushStart(HeadPointer, 12);
     ListPrint(Head);
@@ -149,12 +149,13 @@ int main () {
     ListPopAtIndex(HeadPointer, 1);
     ListPrint(Head);
 
-    printf("\n// Push at Index 2 // \n");
+    printf("\n// Push at Index 2, value 5 // \n");
     ListPushAtIndex(HeadPointer, 5, 2);
     ListPrint(Head);
 
-    printf("\n// Push at Index 1 // \n");
+    printf("\n// Push at Index 1 and 2, value 5 // \n");
     ListPushAtIndex(HeadPointer, 5, 1);
+    ListPushAtIndex(HeadPointer, 5, 2);
     ListPrint(Head);
 
     printf("\n// Pop first item with value 5 // \n");
