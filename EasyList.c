@@ -19,13 +19,20 @@ void ListPushEnd (NextPlaceOps *head, int value) {
     while (Current->next != NULL) {
         Current = Current->next;
     }
-    Current->next = malloc(sizeof(NextPlaceOps));
+    if ((Current->next = malloc(sizeof(NextPlaceOps))) == NULL) {
+        printf("Memory Allocation failed.");
+        return;
+    }
     Current->next->value = value;
     Current->next->next = NULL;
 }
 
 void ListPushStart (NextPlaceOps **head, int val) {
-    NextPlaceOps *NewItem = malloc(sizeof(NextPlaceOps));
+    NextPlaceOps *NewItem;
+    if ((NewItem = malloc(sizeof(NextPlaceOps))) == NULL) {
+        printf("Memory Allocation failed.");
+        return;
+    }
     NewItem->value = val;
     NewItem->next = *head;
 
@@ -83,7 +90,11 @@ void ListPushAtIndex (NextPlaceOps **head, int value, int index) {
         ListPushStart(head, value);
         return;
     }
-    NextPlaceOps *NewItem = malloc(sizeof(NextPlaceOps));
+    NextPlaceOps *NewItem;
+    if ((NewItem = malloc(sizeof(NextPlaceOps))) == NULL) {
+        printf("Memory Allocation failed.");
+        return;
+    }
     NewItem->value = value;
 
     NextPlaceOps *Current = *head;
@@ -119,7 +130,10 @@ void ListPopFirstItemAtValue (NextPlaceOps **headPoint, NextPlaceOps *head, int 
 
 int main () {
     NextPlaceOps *Head = NULL;
-    Head = malloc(sizeof(NextPlaceOps));
+    if ((Head = malloc(sizeof(NextPlaceOps))) == NULL) {
+        printf("Memory Allocation failed.");
+        return;
+    };
 
     if (Head == NULL) {
         return 1;
@@ -127,7 +141,10 @@ int main () {
 
     printf("// Initialized standard list with values 1 and 2 //");
     Head->value = 1;
-    Head->next = malloc(sizeof(NextPlaceOps));
+    if ((Head->next = malloc(sizeof(NextPlaceOps))) == NULL) {
+        printf("Memory Allocation failed.");
+        return;
+    }
     Head->next->value = 2;
     Head->next->next = NULL;
 
